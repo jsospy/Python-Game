@@ -72,6 +72,7 @@ def main():
                 break
 
         keys = pygame.key.get_pressed()
+
         if keys[pygame.K_LEFT] and player.x - PLAYER_VEL >= 0:
             player.x -= PLAYER_VEL
         if keys[pygame.K_RIGHT] and player.x + PLAYER_VEL + player.width <= WIDTH:
@@ -87,16 +88,18 @@ def main():
                 break
         
         if hit:
-            lost_text = FONT.render(f"You Lost! You lasted: {elapsed_time:.2f}", 1, "white")
-            WIN.blit(lost_text, (WIDTH/2 - lost_text.get_width()/2, HEIGHT/2 - lost_text.get_height()/2))
+            lost_text = FONT.render(f"YOU LASTED:{elapsed_time:.2f}s", 1, "green")
+            play_again = FONT.render("SPACE TO PLAY AGAIN", 1, "green")
+            WIN.blit(lost_text, (WIDTH/2 - lost_text.get_width()/2, HEIGHT/5 - lost_text.get_height()/5))
+            WIN.blit(play_again, (WIDTH/2 - play_again.get_width()/2, HEIGHT/2 - play_again.get_height()/2))
             pygame.display.update()
             pygame.time.delay(4000)
-            #LOOP GAME - NON FUNCTIONAL 
-            if event.key == pygame.K_RETURN:
-                main()
-            else:
-                break
                 
+            for event in pygame.event.get():
+                if event.key == pygame.K_SPACE:
+                    main()
+                else:
+                    break                
 
         draw(player, elapsed_time, stars)
     
