@@ -91,7 +91,8 @@ def main():
             WIN.blit(lost_text, (WIDTH/2 - lost_text.get_width()/2, HEIGHT/2 - lost_text.get_height()/2))
             pygame.display.update()
             pygame.time.delay(4000)
-            if keys[pygame.K_RIGHT]:
+            #LOOP GAME - NON FUNCTIONAL 
+            if event.key == pygame.K_RETURN:
                 main()
             else:
                 break
