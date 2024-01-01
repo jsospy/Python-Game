@@ -53,7 +53,12 @@ def main():
     hit = False
 
     while run:
-
+        
+        if elapsed_time == 0:
+            pygame.mixer.init()
+            pygame.mixer.music.load("V.1.mp3") 
+            pygame.mixer.music.play(-1,0,0)
+        
         star_count += clock.tick(60)
         elapsed_time = time.time() - start_time
 
@@ -88,13 +93,14 @@ def main():
                 break
         
         if hit:
+            pygame.mixer.music.stop()
             lost_text = FONT.render(f"YOU LASTED:{elapsed_time:.2f}s", 1, "green")
             play_again = FONT.render("SPACE TO PLAY AGAIN", 1, "green")
             WIN.blit(lost_text, (WIDTH/2 - lost_text.get_width()/2, HEIGHT/5 - lost_text.get_height()/5))
             WIN.blit(play_again, (WIDTH/2 - play_again.get_width()/2, HEIGHT/2 - play_again.get_height()/2))
             pygame.display.update()
             pygame.time.delay(4000)
-                
+            
             for event in pygame.event.get():
                 if event.key == pygame.K_SPACE:
                     main()
